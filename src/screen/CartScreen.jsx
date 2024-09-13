@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   button: {
-    backgroundColor: "#E96E6E",
+    backgroundColor: "#8FD14F",
     height: 60,
     alignItems: "center",
     justifyContent: "center",

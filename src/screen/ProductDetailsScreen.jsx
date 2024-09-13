@@ -1,10 +1,9 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View, ScrollView } from "react-native";
 import React, { useContext, useState } from "react";
 import LinearGradient from "react-native-linear-gradient";
 import Header from "../components/Header";
 import { fonts } from "../utils/fonts";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { addToCart } from "../utils/helper";
 import { CartContext } from "../context/CartContext";
 
 const colorsArray = [
@@ -30,110 +29,115 @@ const ProductDetailsScreen = () => {
     product.color = selectedColor;
     product.size = selectedSize;
     addToCartItem(product);
-    navigation.navigate("CART")
+    navigation.navigate("CART");
   };
+
   return (
     <LinearGradient colors={["#FDF0F3", "#FFFBFC"]} style={styles.container}>
-      <View style={styles.header}>
-        <Header />
-      </View>
-      <View style={styles.imageContainer}>
-        <Image source={{ uri: product.image }} style={styles.coverImage} />
-      </View>
-      <View style={styles.contentContainer}>
-        <View style={styles.textContainer}>
-          <Text style={styles.fontText}>{product.title}</Text>
-          <Text style={styles.fontText}>${product.price}</Text>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.header}>
+          <Header />
         </View>
-        <Text style={[styles.fontText, styles.sizeText]}>Size</Text>
-        {/* size container */}
-        <View style={styles.sizeContainer}>
-          <TouchableOpacity
-            style={styles.sizeValueContainer}
-            onPress={() => setSelectedSize("S")}
-          >
-            <Text
-              style={[
-                styles.sizeValueText,
-                selectedSize === "S" && styles.selectedText,
-              ]}
-            >
-              S
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.sizeValueContainer}
-            onPress={() => setSelectedSize("M")}
-          >
-            <Text
-              style={[
-                styles.sizeValueText,
-                selectedSize === "M" && styles.selectedText,
-              ]}
-            >
-              M
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.sizeValueContainer}
-            onPress={() => setSelectedSize("L")}
-          >
-            <Text
-              style={[
-                styles.sizeValueText,
-                selectedSize === "L" && styles.selectedText,
-              ]}
-            >
-              L
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.sizeValueContainer}
-            onPress={() => setSelectedSize("XL")}
-          >
-            <Text
-              style={[
-                styles.sizeValueText,
-                selectedSize === "XL" && styles.selectedText,
-              ]}
-            >
-              XL
-            </Text>
-          </TouchableOpacity>
+        <View style={styles.imageContainer}>
+          <Image source={{ uri: product.image }} style={styles.coverImage} />
         </View>
-        {/* color container */}
-        <View style={styles.colorContainer}>
-          {colorsArray.map((color, index) => {
-            return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => setSelectedColor(color)}
+        <View style={styles.contentContainer}>
+          <View style={styles.textContainer}>
+            <Text style={styles.fontText}>{product.title}</Text>
+            <Text style={styles.fontText}>${product.price}</Text>
+          </View>
+          {/* SIZE */}
+          <Text style={[styles.fontText, styles.sizeText]}>Size</Text>
+          {/* size container */}
+          <View style={styles.sizeContainer}>
+            <TouchableOpacity
+              style={styles.sizeValueContainer}
+              onPress={() => setSelectedSize("S")}
+            >
+              <Text
+                style={[
+                  styles.sizeValueText,
+                  selectedSize === "S" && styles.selectedText,
+                ]}
               >
-                <View
-                  style={[
-                    styles.borderColorCircle,
-                    selectedColor === color && {
-                      borderColor: color,
-                      borderWidth: 2,
-                      borderRadius: 24,
-                    },
-                  ]}
+                S
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.sizeValueContainer}
+              onPress={() => setSelectedSize("M")}
+            >
+              <Text
+                style={[
+                  styles.sizeValueText,
+                  selectedSize === "M" && styles.selectedText,
+                ]}
+              >
+                M
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.sizeValueContainer}
+              onPress={() => setSelectedSize("L")}
+            >
+              <Text
+                style={[
+                  styles.sizeValueText,
+                  selectedSize === "L" && styles.selectedText,
+                ]}
+              >
+                L
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.sizeValueContainer}
+              onPress={() => setSelectedSize("XL")}
+            >
+              <Text
+                style={[
+                  styles.sizeValueText,
+                  selectedSize === "XL" && styles.selectedText,
+                ]}
+              >
+                XL
+              </Text>
+            </TouchableOpacity>
+          </View>
+          {/* color container */}
+          <Text style={[styles.fontText, styles.sizeText]}>Colors</Text>
+          <View style={styles.colorContainer}>
+            {colorsArray.map((color, index) => {
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => setSelectedColor(color)}
                 >
                   <View
-                    style={[styles.colorCircle, { backgroundColor: color }]}
-                  ></View>
-                </View>
-              </TouchableOpacity>
-            );
-          })}
+                    style={[
+                      styles.borderColorCircle,
+                      selectedColor === color && {
+                        borderColor: color,
+                        borderWidth: 2,
+                        borderRadius: 24,
+                      },
+                    ]}
+                  >
+                    <View
+                      style={[styles.colorCircle, { backgroundColor: color }]}
+                    ></View>
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+          {/* cart button */}
+          <View>
+            <TouchableOpacity style={styles.button} onPress={handleAddToCart}>
+              <Text style={styles.buttonText}>Add to Cart</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        {/* cart button */}
-        <View>
-          <TouchableOpacity style={styles.button} onPress={handleAddToCart}>
-            <Text style={styles.buttonText}>Add to Cart</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </ScrollView>
     </LinearGradient>
   );
 };
@@ -143,6 +147,9 @@ export default ProductDetailsScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  scrollContainer: {
+    flexGrow: 1,
   },
   header: {
     padding: 15,
@@ -166,7 +173,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: fonts.regular,
     fontWeight: "700",
-    color: "#444444",
     color: "#444444",
   },
   sizeText: {
@@ -208,7 +214,7 @@ const styles = StyleSheet.create({
     borderRadius: 18,
   },
   button: {
-    backgroundColor: "#E96E6E",
+    backgroundColor: "#8FD14F",
     height: 62,
     alignItems: "center",
     justifyContent: "center",
@@ -219,6 +225,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "#FFFFFF",
     fontWeight: "700",
+    textAlign: "center",
     fontFamily: fonts.regular,
   },
 });

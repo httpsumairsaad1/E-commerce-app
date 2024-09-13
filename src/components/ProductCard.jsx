@@ -1,4 +1,5 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image } from "react-native";
 import React from "react";
 import { fonts } from "../utils/fonts";
 
@@ -10,8 +11,10 @@ const ProductCard = ({ item, handleProductClick, toggleFavorite }) => {
         handleProductClick(item);
       }}
     >
+
       <Image source={{ uri: item.image }} style={styles.coverImage} />
       <View style={styles.contentContainer}>
+      {/* <Image source={require("../assets/girl2.png")}></Image> */}
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.price}>${item.price}</Text>
       </View>

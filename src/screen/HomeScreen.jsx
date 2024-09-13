@@ -37,7 +37,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <LinearGradient colors={["#FDF0F3", "#FFFBFC"]} style={styles.container}>
+    <LinearGradient colors={["#F5F5F5", "#D5ED9F"]} style={styles.container}>
       {/* header */}
 
       {/* <Tags /> */}
@@ -48,7 +48,7 @@ const HomeScreen = () => {
             <>
               <Header />
               <View>
-                <Text style={styles.headingText}>Match Your Style</Text>
+                <Text style={styles.headingText}>Fit Your Style</Text>
                 <View style={styles.inputContainer}>
                   <Image
                     source={require("../assets/search.png")}
@@ -63,7 +63,7 @@ const HomeScreen = () => {
         }
         data={products}
         numColumns={2}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <ProductCard
             item={item}
             handleProductClick={handleProductDetails}
