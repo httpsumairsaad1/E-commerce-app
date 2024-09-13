@@ -12,6 +12,9 @@ import AccountScreen from "./src/screen/AccountScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CartContext, CartProvider } from "./src/context/CartContext";
 
+import SplashScreen from './src/screen/SplashScreen';  // Import the SplashScreen component
+
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +39,7 @@ const App = () => {
           screenOptions={{
             headerShown: false,
             tabBarShowLabel: false,
+            tabBarActiveTintColor: "#8FD14F",
           }}
         >
           <Tab.Screen
@@ -124,7 +128,7 @@ const App = () => {
                           bottom: 22,
                           height: 14,
                           width: 14,
-                          backgroundColor: "#E96E6E",
+                          backgroundColor: "#8FD14F",
                           borderRadius: 7,
                           alignItems: "center",
                           justifyContent: "center",
